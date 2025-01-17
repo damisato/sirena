@@ -1,1 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quemarlo Todo</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        iframe {
+            border: none;
+            width: 560px;
+            height: 315px;
+            margin-bottom: 20px;
+        }
+        .buttons {
+            display: none; /* Ocultar inicialmente */
+            gap: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script>
+        function showButtons() {
+            const buttonsDiv = document.querySelector('.buttons');
+            buttonsDiv.style.display = 'flex';
+        }
+
+        function monitorVideoPlay() {
+            const iframe = document.querySelector('iframe');
+            const videoUrl = new URL(iframe.src);
+
+            // Escuchar eventos de YouTube usando el API de player
+            window.addEventListener('message', (event) => {
+                if (event.origin === 'https://www.youtube.com' && event.data === 1) {
+                    // Esperar 5 segundos después de que el video empiece a reproducirse
+                    setTimeout(showButtons, 5000);
+                }
+            });
+
+            videoUrl.searchParams.set('enablejsapi', '1');
+            iframe.src = videoUrl.toString();
+        }
+
+        window.onload = monitorVideoPlay;
+    </script>
+</head>
+<body>
+    <!-- Video de YouTube -->
+    <iframe src="https://www.youtube.com/embed/9sxxcuyrfZA?si=Tj2oP7YGMXxcyCs_" allowfullscreen></iframe>
+
+    <!-- Botones Baño y Montaña -->
+    <div class="buttons">
+        <button onclick="alert('Baño seleccionado')">Baño</button>
+        <button onclick="alert('Montaña seleccionada')">Montaña</button>
+    </div>
+</body>
+</html>
 

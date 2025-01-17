@@ -29,28 +29,23 @@
             top: 90%;
             transform: translateY(-50%);
             display: flex;
-            gap: 200px; /* Aumenta el espacio entre botones */
+            gap: 1200px; /* Más separación entre botones */
         }
         .buttons {
-            display: flex;
+            display: none; /* Ocultar inicialmente */
         }
         button {
-            padding: 60px 120px; /* Tamaño grande de botones */
+            padding: 60px 120px; /* Incrementar tamaño de los botones */
             font-size: 32px; /* Texto más grande */
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            background-color: #000; /* Color de fondo inicial */
+            background-color: #000;
             color: white;
             transition: background-color 0.3s ease;
         }
-        /* Hover color para el botón Baño */
-        .btn-baño:hover {
-            background-color: #8A2BE2; /* Violeta */
-        }
-        /* Hover color para el botón Montaña */
-        .btn-montaña:hover {
-            background-color: #1E90FF; /* Azul */
+        button:hover {
+            background-color: #444;
         }
     </style>
     <script>
@@ -87,16 +82,14 @@
     </script>
 </head>
 <body>
-    <!-- Video de YouTube con autoplay -->
+    <!-- Video de YouTube -->
     <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1&autoplay=1" allowfullscreen></iframe>
 
     <!-- Botones Baño y Montaña -->
     <div class="buttons-container">
         <div class="buttons">
-            <!-- Botón Baño con clase específica -->
-            <button class="btn-baño" onclick="window.location.href='baño.html'">Baño</button>
-            <!-- Botón Montaña con clase específica -->
-            <button class="btn-montaña" onclick="window.location.href='montaña.html'">Montaña</button>
+            <button onclick="window.location.href='baño.html'">Baño</button>
+            <button onclick="window.location.href='montaña.html'">Montaña</button>
         </div>
     </div>
 </body>

@@ -40,33 +40,41 @@
         }
     </style>
     <script>
+        let videoPlayed = false;
+
         function showButtons() {
             const buttonsDiv = document.querySelector('.buttons');
             buttonsDiv.style.display = 'flex';
         }
 
-        function monitorVideoPlay() {
+        function checkVideoPlay() {
             const iframe = document.querySelector('iframe');
-            const videoUrl = new URL(iframe.src);
-
-            // Escuchar eventos de YouTube usando el API de player
-            window.addEventListener('message', (event) => {
-                if (event.origin === 'https://www.youtube.com' && event.data === 1) {
-                    // Esperar 5 segundos después de que el video empiece a reproducirse
-                    setTimeout(showButtons, 5000);
+            const player = new YT.Player(iframe, {
+                events: {
+                    onStateChange: function (event) {
+                        if (event.data === YT.PlayerState.PLAYING && !videoPlayed) {
+                            videoPlayed = true;
+                            setTimeout(showButtons, 5000);
+                        }
+                    }
                 }
             });
-
-            videoUrl.searchParams.set('enablejsapi', '1');
-            iframe.src = videoUrl.toString();
         }
 
-        window.onload = monitorVideoPlay;
+        function loadYouTubeAPI() {
+            const tag = document.createElement('script');
+            tag.src = "https://www.youtube.com/iframe_api";
+            const firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        }
+
+        window.onload = loadYouTubeAPI;
+        window.onYouTubeIframeAPIReady = checkVideoPlay;
     </script>
 </head>
 <body>
     <!-- Video de YouTube -->
-    <iframe src="https://www.youtube.com/embed/9sxxcuyrfZA?si=Tj2oP7YGMXxcyCs_" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1" allowfullscreen></iframe>
 
     <!-- Botones Baño y Montaña -->
     <div class="buttons">
@@ -75,4 +83,5 @@
     </div>
 </body>
 </html>
+
 

@@ -15,16 +15,24 @@
             font-family: Arial, sans-serif;
             background-color: #000;
             color: white;
+            position: relative;
         }
         iframe {
             border: none;
             width: 90vw;
-            height: 50vh;
-            margin-bottom: 20px;
+            height: 80vh;
+            position: absolute;
+            top: 10%;
+        }
+        .buttons-container {
+            position: absolute;
+            top: 90%;
+            transform: translateY(-50%);
+            display: flex;
+            gap: 20px;
         }
         .buttons {
             display: none; /* Ocultar inicialmente */
-            gap: 20px;
         }
         button {
             padding: 10px 20px;
@@ -78,9 +86,11 @@
     <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1" allowfullscreen></iframe>
 
     <!-- Botones Baño y Montaña -->
-    <div class="buttons">
-        <button onclick="alert('Baño seleccionado')">Baño</button>
-        <button onclick="alert('Montaña seleccionada')">Montaña</button>
+    <div class="buttons-container">
+        <div class="buttons">
+            <button onclick="alert('Baño seleccionado')">Baño</button>
+            <button onclick="alert('Montaña seleccionada')">Montaña</button>
+        </div>
     </div>
 </body>
 </html>

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +30,7 @@
             top: 90%;
             transform: translateY(-50%);
             display: flex;
-            gap: 600px; /* Más separación entre botones */
+            gap: 1200px; /* Más separación entre botones */
         }
         .buttons {
             display: none; /* Ocultar inicialmente */
@@ -50,6 +51,7 @@
     </style>
     <script>
         let videoPlayed = false;
+        let player; // Variable global para el reproductor
 
         function showButtons() {
             const buttonsDiv = document.querySelector('.buttons');
@@ -58,12 +60,23 @@
 
         function checkVideoPlay() {
             const iframe = document.querySelector('iframe');
-            const player = new YT.Player(iframe, {
+            player = new YT.Player(iframe, {
                 events: {
+                    onReady: function () {
+                        // Establecer la mejor calidad disponible
+                        player.setPlaybackQuality('highres');
+                    },
+                    onPlaybackQualityChange: function () {
+                        // Forzar la mejor calidad si cambia
+                        const currentQuality = player.getPlaybackQuality();
+                        if (currentQuality !== 'highres' && currentQuality !== 'hd1080') {
+                            player.setPlaybackQuality('highres');
+                        }
+                    },
                     onStateChange: function (event) {
                         if (event.data === YT.PlayerState.PLAYING && !videoPlayed) {
                             videoPlayed = true;
-                            setTimeout(showButtons, 5000);
+                            setTimeout(showButtons, 60000);
                         }
                     }
                 }
@@ -83,13 +96,14 @@
 </head>
 <body>
     <!-- Video de YouTube -->
-    <iframe src="https://www.youtube.com/embed/LXUp8JPjv90?enablejsapi=1" allowfullscreen></iframe>
-
-    <!-- Botones Baño y Montaña -->
+    <iframe src="https://www.youtube.com/embed/LXUp8JPjv90?enablejsapi=1&autoplay=1&controls=0" 
+            allowfullscreen></iframe>
+    
+    <!-- Botones-->
     <div class="buttons-container">
         <div class="buttons">
-            <button onclick="alert('Baño seleccionado')">Baño</button>
-            <button onclick="alert('Montaña seleccionada')">Montaña</button>
+            <button onclick="window.location.href='baño.html'">QUEMARLO</button>
+            <button onclick="window.location.href='cielo.html'">CURARLO</button>
         </div>
     </div>
 </body>

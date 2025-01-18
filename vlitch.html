@@ -29,12 +29,17 @@
             top: 90%;
             transform: translateY(-50%);
             display: flex;
-            gap: 1200px; /* Más separación entre botones */
+            justify-content: center;
+            width: 100%; /* Asegura que los botones estén centrados */
+        }
+        .buttons {
+            display: flex; /* Asegura que los botones estén en línea */
+            gap: 20px; /* Espaciado entre botones */
         }
         .buttons button {
             display: none; /* Ocultar inicialmente */
-            padding: 60px 120px; /* Incrementar tamaño de los botones */
-            font-size: 32px; /* Texto más grande */
+            padding: 20px 40px; /* Tamaño de los botones */
+            font-size: 24px; /* Texto más grande */
             border: none;
             border-radius: 10px;
             cursor: pointer;
@@ -106,7 +111,7 @@
     <div class="buttons-container">
         <div class="buttons">
             <button onclick="window.location.href='Lost.html'">Una vez más</button>
-            <button onclick="window.location.href='Ira.html'">Todo cura en la paciencia</button>
+            <button onclick="window.location.href='Ira.html'">Una vez más</button>
         </div>
     </div>
 </body>

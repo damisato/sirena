@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quemarlo Todo</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: white;
+            position: relative;
+        }
+        iframe {
+            border: none;
+            width: 90vw;
+            height: 80vh;
+            position: absolute;
+            top: 10%;
+        }
+        .buttons-container {
+            position: absolute;
+            top: 90%;
+            transform: translateY(-50%);
+            display: flex;
+            gap: 600px; /* Más separación entre botones */
+        }
+        .buttons {
+            display: none; /* Ocultar inicialmente */
+        }
+        button {
+            padding: 60px 120px; /* Incrementar tamaño de los botones */
+            font-size: 32px; /* Texto más grande */
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            background-color: #000;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #444;
+        }
+    </style>
+    <script>
+        let videoPlayed = false;
+
+        function showButtons() {
+            const buttonsDiv = document.querySelector('.buttons');
+            buttonsDiv.style.display = 'flex';
+        }
+
+        function checkVideoPlay() {
+            const iframe = document.querySelector('iframe');
+            const player = new YT.Player(iframe, {
+                events: {
+                    onStateChange: function (event) {
+                        if (event.data === YT.PlayerState.PLAYING && !videoPlayed) {
+                            videoPlayed = true;
+                            setTimeout(showButtons, 5000);
+                        }
+                    }
+                }
+            });
+        }
+
+        function loadYouTubeAPI() {
+            const tag = document.createElement('script');
+            tag.src = "https://www.youtube.com/iframe_api";
+            const firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        }
+
+        window.onload = loadYouTubeAPI;
+        window.onYouTubeIframeAPIReady = checkVideoPlay;
+    </script>
+</head>
+<body>
+    <!-- Video de YouTube -->
+    <iframe src="https://www.youtube.com/embed/LXUp8JPjv90?enablejsapi=1" allowfullscreen></iframe>
+
+    <!-- Botones Baño y Montaña -->
+    <div class="buttons-container">
+        <div class="buttons">
+            <button onclick="alert('Baño seleccionado')">Baño</button>
+            <button onclick="alert('Montaña seleccionada')">Montaña</button>
+        </div>
+    </div>
+</body>
+</html>

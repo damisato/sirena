@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
     <style>
+        @font-face {
+            font-family: 'Poorich';
+            src: url('POORICH.TTF') format('truetype');
+        }
+
         body {
             display: flex;
             flex-direction: column;
@@ -15,6 +20,7 @@
             font-family: Arial, sans-serif;
             background-color: #000000;
         }
+
         a {
             margin-top: 10px;
             padding: 10px 20px;
@@ -23,7 +29,9 @@
             background-color: #000000;
             border-radius: 5px;
             font-size: 18px;
+            font-family: 'Poorich', Arial, sans-serif; /* Aplica la tipografía personalizada */
         }
+
         a:hover {
             background-color: #000000;
         }
@@ -33,7 +41,6 @@
     <!-- Reproductor de música de fondo -->
     <audio autoplay loop>
         <source src="SM_MenuMusic.mp3" type="audio/mpeg">
-      
     </audio>
 
     <!-- Imagen principal -->
